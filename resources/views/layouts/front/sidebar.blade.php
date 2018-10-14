@@ -1,5 +1,15 @@
-<div class="col-md-2">
+<div class="col-xs-4 col-md-2">
     <div class="dashboard-sidebar">
+        <div class="dashboard-userpic">
+            <center>
+                @if(Auth::user()->profile_picture == NULL)
+                    <img src="{{ url('images/noprofile.png')}}" />
+                @else
+                    <?php $profile_picture_path = Auth::user()->id.'/images/'.Auth::user()->profile_picture;?>
+                    <img src="{{ url('files/'.$profile_picture_path.'')}}" />
+                @endif
+            </center>
+        </div>
         <!-- SIDEBAR USER TITLE -->
         <div class="dashboard-usertitle">
             <div class="dashboard-usertitle-name">
@@ -19,7 +29,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" target="_blank">
+                    <a href="{{ url('vehicle') }}">
                         <i class="fa fa-list"></i>My Vehicle 
                     </a>
                 </li>

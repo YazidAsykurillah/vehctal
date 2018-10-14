@@ -9,4 +9,19 @@ class City extends Model
     protected $table = 'cities';
 
     protected $fillable = ['province_id', 'name'];
+
+
+    //Relation to Province
+    public function province()
+    {
+    	return $this->belongsTo('App\Province');
+    }
+
+
+    //Relation with district
+    public function districts()
+    {
+    	return $this->hasMany('App\District');
+    }
+
 }

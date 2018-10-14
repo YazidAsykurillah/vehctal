@@ -9,4 +9,12 @@ class Province extends Model
     protected $table = 'provinces';
 
     protected $fillable = ['name'];
+
+
+    //Relation with City
+    public function cities()
+    {
+    	return $this->hasMany('App\City');
+    }
+
 }

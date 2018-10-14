@@ -23,3 +23,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('vehicle', 'VehicleController');
+
+
+Route::resource('province', 'ProvinceController');
+Route::resource('city', 'CityController');
+Route::resource('district', 'DistrictController');

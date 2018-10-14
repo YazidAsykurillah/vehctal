@@ -23,9 +23,9 @@
         <div class="container-fluid">
             <div class="row m-t-90 profile">
                 @include('layouts.front.sidebar')
-                <div class="col-md-10">
+                <div class="col-xs-8 col-md-10">
                     <div class="dashboard-content">
-                       @yield('content')
+                        @yield('content')
                     </div>
                 </div>
             </div>

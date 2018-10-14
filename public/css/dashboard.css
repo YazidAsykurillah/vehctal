@@ -6,12 +6,12 @@ Licensed under MIT
 
 body {
   background: #F1F3FA;
-  padding-top: 70px;
+  /*padding-top: 56px;*/
 }
 
 /* Profile container */
 .profile {
-  margin: 20px 0;
+  /*margin: 20px 0;*/
 }
 
 .dashboard-sidebar {
@@ -87,9 +87,13 @@ body {
   margin-left: -2px;
 }
 
-/* Profile Content */
+/* Dashboard Content */
 .dashboard-content {
-  padding: 20px;
-  background: #fff;
+  padding: 0px;
   min-height: 460px;
+}
+
+.my-panel-title{
+  font-size: 16px;
+  margin-top: 13px;
 }
