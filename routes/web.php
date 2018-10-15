@@ -22,8 +22,13 @@ Route::get('/about', function(){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::resource('vehicle', 'VehicleController');
 
+
+Route::resource('brand', 'BrandController');
+//Select2
+Route::get('/select2Brand', 'BrandController@select2');
 
 Route::resource('province', 'ProvinceController');
 Route::resource('city', 'CityController');

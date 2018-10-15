@@ -10,6 +10,11 @@
 	</style>
 @endsection
 
+@section('breadcrumbList')
+    <li><a href="{{ url('vehicle') }}">My Vehicle</a></li>
+    <li class="active">Add New</li>
+@endsection
+
 @section('content')
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -45,6 +50,28 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('brand_id') ? ' has-error' : '' }}">
+                            <label for="brand_id" class="col-md-4 control-label">Brand</label>
+                            <div class="col-md-6">
+                                <select name="brand_id" id="brand_id" class="form-control"></select>
+                                @if ($errors->has('brand_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('brand_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                            <label for="description" class="col-md-4 control-label">Description</label>
+                            <div class="col-md-6">
+                                <textarea name="description" id="description" class="form-control"></textarea>
+                                @if ($errors->has('description'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
@@ -61,5 +88,47 @@
 
 
 @section('scripts')
+    <script type="text/javascript">
+        
+        $('#vehicle_type_id').select2({
+            placeholder : 'Selct vehicle type',
+            allowClear: true
+        });
+        $('#vehicle_type_id').on('select2:select', function (e) {
+            $('#brand_id').val('').trigger('change');
+        }).on('select2:unselect',function(e){
+            $('#brand_id').val('').trigger('change');
+        });
 
+
+        var old_brand_id = "{{old('brand_id')}}";
+        console.log(old_brand_id);
+        $('#brand_id').val(old_brand_id).trigger('change');
+        $('#brand_id').select2({
+            placeholder: 'Select an item',
+            ajax: {
+              url: '/select2Brand',
+              dataType: 'json',
+              delay: 250,
+              data: function (params) {
+                   return {
+                        q: params.term,
+                        vehicle_type_id: $('#vehicle_type_id').val(),
+                        page: params.page
+                   };
+               },
+              processResults: function (data) {
+                return {
+                  results:  $.map(data, function (item) {
+                        return {
+                            text: item.name,
+                            id: item.id
+                        }
+                    })
+                };
+              },
+              cache: true
+            }
+        });
+    </script>
 @endsection

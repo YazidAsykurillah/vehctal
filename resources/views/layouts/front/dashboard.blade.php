@@ -15,6 +15,10 @@
         <link href="{{ url('css/dashboard.css') }}" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200i,300,300i,400,600,700,700i,900" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700&amp;subset=latin-ext" rel="stylesheet">
+
+        <!--Select2-->
+        <link href="{{ url('css/select2/select2.css') }}" rel="stylesheet">
+
         @yield('styles')
     </head>
     <body>
@@ -25,6 +29,11 @@
                 @include('layouts.front.sidebar')
                 <div class="col-xs-8 col-md-10">
                     <div class="dashboard-content">
+                        <ol class="breadcrumb">
+                            <li><a href="{{ url('home') }}">Home</a></li>
+                            @yield('breadcrumbList')
+                            
+                        </ol>
                         @yield('content')
                     </div>
                 </div>
@@ -36,7 +45,10 @@
         <script src="{{ url('js/jquery-v1.11.3.js') }}"></script>
 		<script src="{{ url('bootstrap/js/bootstrap.min.js') }}"></script>
 		<script src="{{ url('js/owl.carousel.js') }}"></script>
-		<script src="{{ url('js/custom.js') }}"></script>
+        <script src="{{ url('js/custom.js') }}"></script>
+
+        <!--Select2-->
+		<script src="{{ url('js/select2/select2.js') }}"></script>
         
 
         @yield('scripts')

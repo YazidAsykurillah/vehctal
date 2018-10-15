@@ -40,10 +40,8 @@
 			<div class="clearfix"></div>
 	  	</div>
 	  	<div class="panel-body">
-	    	
+	    	<div class="row">
     		@if($vehicles->count() > 0 )
-    		<?php $countedColumns = 1;?>
-    		<div class="row">
 	    		@foreach($vehicles as $vehicle)
 				<div class="col-sm-6 col-md-3">
 			    	<div class="thumbnail">
@@ -76,15 +74,12 @@
 			        				<i class="fa fa-trash"></i>
 			        			</a>
 			        		</div>
-			        		{{ $countedColumns}}
 			      		</div>
 			    	</div>
 			  	</div>
-			  	<?php $countedColumns++;?>
 			  	@endforeach
-			</div>
 		  	@endif
-			
+			</div>
 	  	</div>
 	</div>
 @endsection
