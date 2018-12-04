@@ -24,10 +24,10 @@ class StoreVehicleRequest extends FormRequest
     public function rules()
     {
         return [
-            'primary_media'=>'image|required|max:2024|mimes:jpeg,png,jpg,JPG,gif,svg',
+            /*'primary_media'=>'image|required|max:2024|mimes:jpeg,png,jpg,JPG,gif,svg',
             'vehicle_type_id'=>'required',
             'brand_id'=>'required',
-            'description'=>'required',
+            'description'=>'required',*/
         ];
     }
 }

@@ -47,16 +47,11 @@
 	    		@foreach($vehicles as $vehicle)
 				<div class="col-sm-6 col-md-3">
 			    	<div class="thumbnail">
-			    		@if($vehicle->media->count() > 0)
-			    			<?php $primary_media="";?>
-			    			@foreach($vehicle->media as $media)
-			    				@if($media->is_primary == TRUE)
-			    					<?php $primary_media = 'files/'.Auth::user()->id.'/images/thumb_'.$media->file_name;?>
-			    				@endif
-			    			@endforeach
-			    			<img src="{{ url($primary_media) }}" alt="{{ $primary_media }}">
+			    		@if($vehicle->primary_media->count() > 0)
+			    			<?php $primary_media_path=$vehicle->primary_media->first()->path;?>
+			    			<img src="{{url('storage/'.$primary_media_path) }}" alt="{{url('storage/'.$primary_media_path) }}" >
 			    		@else
-			      		<img src="{{ url('images/no-image.jpg') }}" alt="...">
+			      			<img src="{{ url('images/no-image.jpg') }}" alt="...">
 			      		@endif
 			      		<div class="caption">
 			        		<h4>

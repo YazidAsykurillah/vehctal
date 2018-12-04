@@ -36,6 +36,18 @@
                                 @endif
                             </div>
                         </div>
+                        <!--Non Primary Medias-->
+                        <div class="form-group{{ $errors->has('non_primary_medias') ? ' has-error' : '' }}">
+                            <label for="non_primary_medias" class="col-md-6 control-label">Non Primary Media</label>
+                            <div class="col-md-6">
+                                <input type="file" class="form-control" name="non_primary_medias[]" multiple />
+                                @if ($errors->has('non_primary_medias'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('non_primary_medias') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 		    		</div>
 		    		<div class="col-md-9">
                         <div class="form-group{{ $errors->has('vehicle_type_id') ? ' has-error' : '' }}">
@@ -74,7 +86,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" id="btn-submit-vehicle">
                                     Save
                                 </button>
                             </div>
@@ -89,6 +101,7 @@
 
 @section('scripts')
     <script type="text/javascript">
+        $('#btn-submit-vehicle').prop('disabled', false);
         
         $('#vehicle_type_id').select2({
             placeholder : 'Selct vehicle type',
@@ -129,6 +142,11 @@
               },
               cache: true
             }
+        });
+
+        //Submit form handling
+        $('#form-add-vehicle').on('submit', function(){
+            $('#btn-submit-vehicle').prop('disabled', true);
         });
     </script>
 @endsection

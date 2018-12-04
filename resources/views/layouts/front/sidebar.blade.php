@@ -34,8 +34,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <i class="fa fa-envelope"></i>Inbox
+                    <a href="{{ url('media') }}">
+                        <i class="fa fa-envelope"></i>Media
                     </a>
                 </li>
                 <li>

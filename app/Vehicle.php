@@ -32,9 +32,15 @@ class Vehicle extends Model
    	}
    	
    	//Relation to Vehicle Media
-   	public function media(){
+   	public function vehicle_media(){
    		return $this->hasMany('App\VehicleMedia');
    	}
+
+      //Get the primay media of the vehicle
+      public function primary_media()
+      {
+         return $this->hasMany('App\VehicleMedia')->where('is_primary',TRUE);
+      }
 
       //Relation to Province
       public function province()

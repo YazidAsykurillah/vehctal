@@ -15,7 +15,7 @@ use App\Vehicle;
 use App\User;
 use App\Media;
 
-class VehicleController extends Controller
+class VehicleController_back extends Controller
 {
     public function __construct()
     {
@@ -54,32 +54,6 @@ class VehicleController extends Controller
      */
     public function store(StoreVehicleRequest $request)
     {
-        //check if request has non_primary_medias
-        if($request->hasFile('non_primary_medias')){
-
-            $allowedfileExtension=['pdf','jpg','png','docx'];
-
-            $npm_files = $request->file('non_primary_medias');
-
-            foreach($npm_files as $npm_file){
-
-                $npm_filename = time().'.'.$npm_file->getClientOriginalName();
-
-                $npm_extension = $npm_file->getClientOriginalExtension();
-
-                $check=in_array($npm_extension,$allowedfileExtension);
-
-                //dd($check);
-
-                if($check){
-                    foreach ($request->non_primary_medias as $npm) {
-                        $npm_filename = $npm->store('media', $npm_filename);
-                    }
-                }
-            }
-        }
-        
-        exit();
         //Upload the primary media
         $pm= $request->file('primary_media');
         $extension = $pm->getClientOriginalExtension();
@@ -90,7 +64,12 @@ class VehicleController extends Controller
 
         $pm_file_path = storage_path('app/public/media/'.$pm_file_name);
         Image::make($pm_file_path)->resize(242, 200)->save(storage_path('app/public/media/thumb_'.$pm_file_name));
-        
+        //save primary media to media table
+        $newPM = new Media;
+        $newPM->user_id = Auth::user()->id;
+        $newPM->path='media/thumb_'.$pm_file_name;
+        $newPM->save();
+
         //now save vehicle model
         $newVehicle = new Vehicle;
         $newVehicle->user_id = Auth::user()->id;
@@ -102,7 +81,7 @@ class VehicleController extends Controller
         //attach vehicle primary media
         $vpm_data = [
             'vehicle_id'=>$newVehicle->id,
-            'path'=>'media/thumb_'.$pm_file_name,
+            'media_id'=>$newPM->id,
             'is_primary'=>TRUE,
             'is_allowed'=>TRUE
         ];

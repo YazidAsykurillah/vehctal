@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('vehicle', 'VehicleController');
 
+Route::resource('media', 'MediaController');
 
 Route::resource('brand', 'BrandController');
 //Select2
